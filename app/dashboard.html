@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html><body>
+<h1>Dashboard</h1>
+<p>Logged in as: <b>{{ user.email }}</b> (Role: {{ user.role }})</p>
+<hr>
+
+<!-- NEW SCAN BUTTON -->
+<form method="post" action="/scan/run">
+  <button type="submit" style="padding: 10px 20px; background: green; color: white; border: none; cursor: pointer;">
+    ▶ Run Bulk Scan Now
+  </button>
+</form>
+<br>
+
+{% if user.role == 'admin' %}
+  <h3>Admin Controls</h3>
+  <a href="/admin/queue">Go to Moderation Queue</a><br><br>
+{% endif %}
+
+<h3>Recent Scan Jobs</h3>
+<ul>
+  {% for job in jobs %}
+    <li>Job #{{ job.id }} - Status: <b>{{ job.status }}</b> {{ job.summary_json }}</li>
+  {% else %}
+    <li>No scans run yet.</li>
+  {% endfor %}
+</ul>
+<hr>
+<form method="post" action="/logout"><button>Logout</button></form>
+</body></html>
