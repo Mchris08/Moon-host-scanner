@@ -1,0 +1,4 @@
+base_url: "https://your-render-url.onrender.com"
+scoring:
+  zim_bonus: 15
+  min_working_score: 30
