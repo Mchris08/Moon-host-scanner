@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html><body>
+<h1>Admin Moderation Queue</h1>
+<p>Logged in as: {{ admin.email }}</p>
+<table border="1" cellpadding="8" style="width: 100%; text-align: left;">
+  <tr><th>Host</th><th>Port</th><th>Score</th><th>Status</th><th>Actions</th></tr>
+  {% for h in hosts %}
+  <tr>
+    <td>{{ h.host }}</td>
+    <td>{{ h.port }}</td>
+    <td>{{ h.score }}</td>
+    <td>{{ h.status }}</td>
+    <td>
+      <form method="post" action="/admin/queue/approve/{{ h.id }}" style="display:inline;">
+        <button style="background:green; color:white; border:none; padding:5px;">✅ Approve</button>
+      </form>
+      <form method="post" action="/admin/queue/reject/{{ h.id }}" style="display:inline;">
+        <button style="background:red; color:white; border:none; padding:5px;">❌ Reject</button>
+      </form>
+    </td>
+  </tr>
+  {% else %}
+  <tr><td colspan="5">No pending hosts found. Run a scan from the dashboard!</td></tr>
+  {% endfor %}
+</table>
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+</body></html>
